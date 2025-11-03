@@ -76,6 +76,8 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)/login" />
         <Stack.Screen name="(tabs)/register" />
         <Stack.Screen name="(tabs)/todos" />
+        <Stack.Screen name="(tabs)/profile" />
+        <Stack.Screen name="(tabs)/forgot-password" />
       </Stack>
     </ThemeProvider>
   );

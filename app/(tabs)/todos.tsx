@@ -7,6 +7,7 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import React, { useState, useMemo } from "react";
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   Text,
   TextInput,
@@ -76,7 +77,16 @@ export default function TodosScreenClean() {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => deleteTodo(item.id)}
+        onPress={() =>
+          Alert.alert(
+            "Confirmar",
+            "¿Estás seguro de eliminar esta tarea?",
+            [
+              { text: "Cancelar", style: "cancel" },
+              { text: "Eliminar", onPress: () => deleteTodo(item.id) },
+            ]
+          )
+        }
         style={styles.deleteButton}
       >
         <Text style={styles.deleteButtonText}>🗑️</Text>
@@ -99,6 +109,10 @@ export default function TodosScreenClean() {
         <TouchableOpacity onPress={handleLogout}
           style={styles.logoutButton}>
           <Text style={styles.logoutText}>Salir</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/(tabs)/profile")} 
+          style={styles.logoutButton}>
+          <Text style={styles.logoutText}>Perfil</Text>
         </TouchableOpacity>
       </View>
 

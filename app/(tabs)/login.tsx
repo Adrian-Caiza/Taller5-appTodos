@@ -71,6 +71,11 @@ export default function LoginScreen() {
                             <Text style={styles.buttonText}>Entrar</Text>
                         )}
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.push("/(tabs)/forgot-password")}>
+                        <Text style={{ color: "#007AFF", textAlign: "center", marginTop: 10 }}>
+                            ¿Olvidaste tu contraseña?
+                        </Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={goToRegister}
                         style={styles.linkButton}>
