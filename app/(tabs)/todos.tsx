@@ -1,5 +1,6 @@
 // 🟢 NUEVA VERSION: UI completamente desacoplada de la base de datos
- 
+import { useAuth } from "@/src/presentation/hooks/useAuth";
+import { useRouter } from "expo-router";
 import { useTodos } from "@/src/presentation/hooks/useTodos";
 import { createStyles, defaultLightTheme, defaultDarkTheme } from "@/src/presentation/styles/todos.styles";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -12,30 +13,39 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
- 
+
 // 🟢 BENEFICIO: Este componente NO SABE si usamos SQLite, Firebase, o una API
 // Solo sabe que puede llamar a addTodo, toggleTodo, deleteTodo
- 
+
 export default function TodosScreenClean() {
   const [inputText, setInputText] = useState("");
   const { todos, loading, addTodo, toggleTodo, deleteTodo } = useTodos();
- 
+
+  const { user, logout } = useAuth();
+  const router = useRouter();
   // 🎨 Detectar tema y crear estilos dinámicamente
   const colorScheme = useColorScheme();
   const styles = useMemo(
     () => createStyles(colorScheme === 'dark' ? defaultDarkTheme : defaultLightTheme),
     [colorScheme]
   );
- 
+
   const handleAddTodo = async () => {
     if (!inputText.trim()) return;
- 
+
     const success = await addTodo(inputText);
     if (success) {
       setInputText("");
     }
   };
- 
+
+  const handleLogout = async () => {
+    const success = await logout();
+    if (success) {
+      router.replace("/(tabs)/login");
+    }
+  };
+
   if (loading) {
     return (
       <View style={[styles.container, styles.centerContent]}>
@@ -47,7 +57,7 @@ export default function TodosScreenClean() {
       </View>
     );
   }
- 
+
   const renderTodo = ({ item }: { item: any }) => (
     <View style={styles.todoItem}>
       <TouchableOpacity
@@ -73,11 +83,27 @@ export default function TodosScreenClean() {
       </TouchableOpacity>
     </View>
   );
- 
+
   return (
+
     <View style={styles.container}>
+      {/* NUEVO HEADER CON INFO DE USUARIO */}
+      <View style={styles.header}>
+        <View style={styles.userAvatarPlaceholder}>
+          <Text style={styles.userAvatarText}>
+            {user?.displayName?.charAt(0) || "U"}
+          </Text>
+        </View>
+        <Text style={styles.userName}>{user?.displayName ||
+          "Usuario"}</Text>
+        <TouchableOpacity onPress={handleLogout}
+          style={styles.logoutButton}>
+          <Text style={styles.logoutText}>Salir</Text>
+        </TouchableOpacity>
+      </View>
+
       <Text style={styles.title}>Mis Tareas (Clean)</Text>
- 
+
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -90,7 +116,7 @@ export default function TodosScreenClean() {
           <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
       </View>
- 
+
       <FlatList
         data={todos}
         renderItem={renderTodo}
@@ -98,7 +124,7 @@ export default function TodosScreenClean() {
         style={styles.list}
         contentContainerStyle={styles.listContent}
       />
- 
+
       <Text style={styles.footer}>
         Total: {todos.length} | Completadas:{" "}
         {todos.filter((t) => t.completed).length}
