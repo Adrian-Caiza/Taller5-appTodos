@@ -1,39 +1,24 @@
 import { StyleSheet } from "react-native";
 
 export interface TodosTheme {
-
   background: string;
-
   surface: string;
-
   text: string;
-
   textSecondary: string;
-
   primary: string;
-
   primaryText: string;
-
   border: string;
-
   placeholder: string;
-
 }
 
 /**
-
 * Factory de estilos que recibe el tema como parametro
-
 * Esto permite estilos dinmicos basados en dark/light mode
-
 */
 
 export const createStyles = (theme: TodosTheme) =>
-
   StyleSheet.create({
-
     container: {
-
       flex: 1,
 
       backgroundColor: theme.background,
@@ -287,6 +272,7 @@ export const createStyles = (theme: TodosTheme) =>
       padding: 10,
       backgroundColor: "#0055CC",
       borderRadius: 8,
+      marginRight: 10,
     },
     logoutText: {
       color: "#fff",

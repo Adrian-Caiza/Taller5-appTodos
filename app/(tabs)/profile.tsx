@@ -4,10 +4,12 @@ import { useAuth } from "@/src/presentation/hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import { auth, db } from "@/Firebaseconfig";
 import { doc, updateDoc } from "firebase/firestore";
+import { useRouter } from "expo-router";
 
 export default function ProfileScreen() {
     const { user } = useAuth();
     const [displayName, setDisplayName] = useState(user?.displayName || "");
+    const router = useRouter();
 
     const handleUpdate = async () => {
         try {
@@ -33,6 +35,13 @@ export default function ProfileScreen() {
             <TouchableOpacity style={styles.button} onPress={handleUpdate}>
                 <Text style={styles.buttonText}>Guardar Cambios</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+                style={[styles.button, styles.backButton]}
+                onPress={() => router.replace("/(tabs)/todos")}
+            >
+                <Text style={styles.buttonText}>Volver</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -42,6 +51,9 @@ const styles = StyleSheet.create({
     title: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
     text: { fontSize: 16, marginBottom: 20 },
     input: { borderWidth: 1, borderColor: "#ccc", padding: 10, borderRadius: 8, marginBottom: 20 },
-    button: { backgroundColor: "#007AFF", padding: 15, borderRadius: 8 },
+    button: { backgroundColor: "#007AFF", padding: 15, borderRadius: 8, marginTop: 10 },
     buttonText: { color: "#fff", textAlign: "center", fontWeight: "bold" },
+    backButton: {
+        backgroundColor: "#047016ff",
+    },
 });

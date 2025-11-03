@@ -12,6 +12,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { container } from "@/src/di/container";
 import { useAuth } from "@/src/presentation/hooks/useAuth"; // ← NUEVO 
+
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -41,7 +42,7 @@ export default function RootLayout() {
     if (!containerReady || authLoading) return;
 
     const inAuthGroup = segments[0] === "(tabs)" &&
-      (segments[1] === "login" || segments[1] === "register");
+      (segments[1] === "login" || segments[1] === "register" || segments[1] === "forgot-password");
 
     if (!user && !inAuthGroup) {
       // Usuario no autenticado intenta acceder a ruta protegida 
