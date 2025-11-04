@@ -39,7 +39,7 @@ export default function ForgotPasswordScreen() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Recuperar Contraseña</Text>
+            <Text style={styles.title}>🔑 Recuperar Contraseña</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Ingresa tu email"
@@ -63,28 +63,50 @@ export default function ForgotPasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, justifyContent: "center" },
+    container: { 
+        flex: 1, 
+        paddingHorizontal: 25, // Aumenta el padding lateral para que no toque los bordes
+        justifyContent: "center",
+        backgroundColor: "#000", // Asegura que el fondo sea negro (si no lo es por defecto)
+    },
+    // --- ESTILOS MEJORADOS PARA LA LLAVE Y EL TEXTO SUPERIOR ---
     title: {
-        fontSize: 22,
+        // La imagen de la llave y el texto están mezclados en el HTML.
+        // Si el ícono de la llave no es un componente aparte, necesitas ajustar el texto.
+        // Si quieres que el título esté arriba, quita justifyContent: "center" del container y usa paddingTop
+        fontSize: 32, // Reducido para que sea más legible
         fontWeight: "bold",
-        marginBottom: 20,
+        color: "#fff", // El texto debe ser blanco sobre fondo negro
+        marginBottom: 50, // Añade más espacio debajo del título (separándolo del input)
         textAlign: "center",
     },
+    // --- ESTILOS MEJORADOS PARA EL INPUT ---
     input: {
+        height: 50, // Altura definida para mejor usabilidad
         borderWidth: 1,
         borderColor: "#ccc",
-        padding: 10,
+        backgroundColor: "#222", // Un gris oscuro para que el input se destaque ligeramente
+        color: "#fff", // Texto de entrada blanco
+        paddingHorizontal: 15, // Más relleno horizontal
         borderRadius: 8,
-        marginBottom: 20,
+        marginBottom: 20, // Más separación debajo del input
     },
+    // --- ESTILOS MEJORADOS PARA LOS BOTONES ---
     button: {
         backgroundColor: "#007AFF",
         padding: 15,
         borderRadius: 8,
-        marginTop: 10,
+        // Eliminamos el 'marginTop: 10' de aquí para controlarlo mejor en 'backButton'
+        width: '100%', // Asegura que el botón ocupe todo el ancho con el padding del container
     },
     backButton: {
-        backgroundColor: "#999",
+        backgroundColor: "#555", // Gris más oscuro para diferenciarse mejor
+        marginTop: 15, // ¡CLAVE! Separa el botón gris del botón azul (15px)
     },
-    buttonText: { color: "#fff", textAlign: "center", fontWeight: "bold" },
+    buttonText: { 
+        color: "#fff", 
+        textAlign: "center", 
+        fontWeight: "bold", 
+        fontSize: 16 // Aumenta el tamaño de la fuente para mejor lectura
+    },
 });

@@ -24,7 +24,7 @@ export default function ProfileScreen() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Editar Perfil</Text>
+            <Text style={styles.title}>✍ Editar Perfil</Text>
             <Text style={styles.text}>Email: {user?.email}</Text>
             <TextInput
                 style={styles.input}
@@ -47,13 +47,59 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-    title: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
-    text: { fontSize: 16, marginBottom: 20 },
-    input: { borderWidth: 1, borderColor: "#ccc", padding: 10, borderRadius: 8, marginBottom: 20 },
-    button: { backgroundColor: "#007AFF", padding: 15, borderRadius: 8, marginTop: 10 },
-    buttonText: { color: "#fff", textAlign: "center", fontWeight: "bold" },
+    // Contenedor principal con fondo blanco y espaciado general
+    container: { 
+        flex: 1, 
+        paddingHorizontal: 25, // Un poco más de margen horizontal 
+        paddingTop: 50,      // Añade un poco de espacio en la parte superior
+        backgroundColor: "#fff",
+        
+    },
+    
+    // Título principal
+    title: { 
+        fontSize: 32, 
+        fontWeight: "bold", 
+        marginBottom: 40,      // Separación adecuada del contenido
+        textAlign: "center", 
+    },
+    
+    // Texto del Email
+    text: { 
+        fontSize: 16, 
+        marginBottom: 10,       // Pequeña separación del input
+        marginLeft: 5,        // Un pequeño margen para que no esté pegado al borde invisible
+    },
+    
+    // Campo de Entrada (Input)
+    input: { 
+        borderWidth: 1, 
+        borderColor: "#ccc", 
+        paddingHorizontal: 15, // Más relleno horizontal
+        height: 50,            // Altura cómoda para el dedo
+        borderRadius: 8, 
+        marginBottom: 25,      // Espaciado generoso antes del primer botón
+    },
+    
+    // Botón principal (Guardar Cambios)
+    button: { 
+        backgroundColor: "#007AFF", 
+        padding: 15, 
+        borderRadius: 8, 
+        // Eliminamos el marginTop: 10 aquí, ya que el marginBottom del Input lo maneja
+    },
+    
+    // Texto de los botones
+    buttonText: { 
+        color: "#fff", 
+        textAlign: "center", 
+        fontWeight: "bold" 
+    },
+    
+    // Botón Volver (Back Button)
     backButton: {
         backgroundColor: "#047016ff",
+        // ESTO ES LO CRÍTICO: Añade un margen superior claro para separarlo del botón azul.
+        marginTop: 15, 
     },
 });
